@@ -1,7 +1,7 @@
 
 window.GameBoard = window.GameBoard || {};   
 
-(function ($, g, sx, sy) {
+(function (g, sx, sy) {
 
     var Snake = function() {
         this.head = { x: sx/2, y: sy/2 };
@@ -47,4 +47,4 @@ window.GameBoard = window.GameBoard || {};
     
     g.Snake = Snake;
     
-})(jQuery, GameBoard, 150, 150);
+})(window.GameBoard, 150, 150);

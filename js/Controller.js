@@ -1,10 +1,10 @@
 
 window.GameBoard = window.GameBoard || {};
 
-(function ($, g) {
+(function (g) {
         
     var Controller = function() {
-        document.addEventListener('keydown', $.proxy(this.onKeyDown, this));
+        document.addEventListener('keydown', this.onKeyDown);
     }
     
     Controller.prototype.onKeyDown = function(event) {
@@ -28,10 +28,10 @@ window.GameBoard = window.GameBoard || {};
         }
         
         if (direction != null) {
-            $(this).trigger('directionChanged', [direction]);   
+            g.events.trigger('onDirectionChanged', { direction: direction });
         }
     }
     
     g.Controller = Controller;
     
-})(jQuery, GameBoard);
+})(window.GameBoard);

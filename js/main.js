@@ -1,7 +1,7 @@
 
 window.GameBoard = window.GameBoard || {};
 
-(function ($, g) {
+(function (g) {
 
     var snake = new g.Snake();
     var fruit = new g.FruitMaker();
@@ -34,21 +34,21 @@ window.GameBoard = window.GameBoard || {};
         snake.move(pos.x, pos.y);
     }
     
-    $(controller).on('directionChanged', onDirectionChanged);
+    g.events.bind('onDirectionChanged', onDirectionChanged);
 
-    $(document).ready(function() {
+    window.onload = function() {
         var canvas = document.getElementById("gameboard");
         var ctx = canvas.getContext('2d');
         
-        $(fruit).trigger('makeFruit', [ctx, canvas.width, canvas.height]);
+        g.events.trigger('onMakeFruit', { context: ctx, width: canvas.width, height: canvas.height });
         
         setInterval(function() {
             ctx.save();
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            $(controller).trigger('directionChanged', previousDirection);
+            g.events.trigger('onDirectionChanged', previousDirection);
             snake.draw(ctx);
             ctx.restore();
         }, 500);
-    });
+    };
     
-})(jQuery, GameBoard);
+})(window.GameBoard);

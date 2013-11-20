@@ -1,23 +1,23 @@
 
 window.GameBoard = window.GameBoard || {};
 
-(function ($, g) {
+(function (g) {
         
     var FruitMaker = function() {
-        $(this).on('makeFruit', $.proxy(this.onMakeFruit, this));
+        g.events.bind('onMakeFruit', this.onMakeFruit);
     }
     
-    FruitMaker.prototype.onMakeFruit = function(event, ctx, width, height) {
+    FruitMaker.prototype.onMakeFruit = function(event, params) {
         var randPos = {
-            x: Math.floor((Math.random()*width)+1),
-            y: Math.floor((Math.random()*height)+1)
+            x: Math.floor((Math.random()*params.width)+1),
+            y: Math.floor((Math.random()*params.height)+1)
         }
         
-        ctx.rect(randPos.x, randPos.y, 10, 10);
-        ctx.fillStyle = "red";
-        ctx.fill();
+        params.contex.rect(randPos.x, randPos.y, 10, 10);
+        params.contex.fillStyle = "red";
+        params.contex.fill();
     }
     
     g.FruitMaker = FruitMaker;
     
-})(jQuery, GameBoard);
+})(window.GameBoard);
