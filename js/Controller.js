@@ -28,7 +28,7 @@ window.GameBoard = window.GameBoard || {};
         }
         
         if (direction != null) {
-            g.events.trigger('onDirectionChanged', { direction: direction });
+            g.events.trigger('onDirectionChanged', direction);
         }
     }
     

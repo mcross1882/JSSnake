@@ -26,11 +26,11 @@ window.GameBoard = window.GameBoard || {};
     }
     
     Snake.prototype.move = function(mx, my) {
-        this.tail.length--;
         
         for (var i=this.tail.length; i >= 0; i--) {
             this.tail[i] = this.tail[i-1];   
         }
+        this.tail.length--;
         this.tail[0] = this.head;
         this.head = { x: mx, y: my };
     }
