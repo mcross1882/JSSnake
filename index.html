@@ -3,59 +3,7 @@
     <head>
         <title>Snake :: The best game alive</title>
         
-        <style type="text/css">
-            body {
-                color: #303030;
-            }
-            
-            .green {
-                color: #44EE44;
-            }
-            
-            .container {
-                background-color: #FFFFFF;
-                box-shadow: 5px 5px 5px #EFEFEF;
-                width: 350px;
-                padding: 1em;
-            }
-            
-            .pull-left {
-                float: left;
-            }
-            
-            .pull-right {
-                float: right;
-            }
-            
-            .btn-group {
-                text-align: center;
-                padding: 0.5em 0px;
-            }
-            
-            .btn-group .btn {
-                border: 0px;
-                border-right: 1px solid #CCCCCC;
-                border-left: 1px solid #CCCCCC;
-                background-color: transparent;
-            }
-            
-            .btn-group .btn:hover {
-                color: #0188CC;
-            }
-            
-            .btn-group .selected {
-                color: #0188CC;
-            }
-            
-            .btn-group>:first-child,
-            .btn-group>:last-child {
-                border: 0px;
-            }
-            
-            #gameboard {
-                width: 100%;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/theme.css" />
         
         <script type="text/javascript" src="js/GameBoard.js"></script>
         <script type="text/javascript" src="js/Events.js"></script>
@@ -75,14 +23,15 @@
                 </p>
             </div>
             
-            <canvas id="gameboard" style="border: 1px solid black;"></canvas>
+            <canvas id="gameboard"></canvas>
             
             <div class="footer">
                 <div class="btn-group">
-                    <button type="button" class="btn" data-mode="easy">Easy</button>
-                    <button type="button" class="btn selected" data-mode="medium">Medium</button>
-                    <button type="button" class="btn" data-mode="hard">Hard</button>
+                    <button id="settings-easy" type="button" class="btn">Easy</button>
+                    <button id="settings-medium" type="button" class="btn selected">Medium</button>
+                    <button id="settings-hard" type="button" class="btn">Hard</button>
                 </div>
+                <button id="start-game" type="button" class="btn pull-right">Start</button>
             </div>
         </div>
     </body>
