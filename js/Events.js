@@ -4,13 +4,43 @@ window.GameBoard = window.GameBoard || {};
 (function (g) {
 
     var Events = function() {
-        this.ALLOWED_ERROR_MARGIN = 10;
+        // Constructor
+        this.ALLOWED_ERROR_MARGIN = 5;
         
         this.eventStorage = [];
         this.collisionStorage = [];
+        
+        // Private methods
+        this.isIntersection = function (x, y, boundry) {
+            // Check left and right bounds
+            if (
+                (this.getAbsoluteDistance(x, boundry.left) <= this.ALLOWED_ERROR_MARGIN ||
+                this.getAbsoluteDistance(x, boundry.right) <= this.ALLOWED_ERROR_MARGIN) &&
+                (y >= boundry.top && y <= boundry.bottom)
+            ) {
+                return true;
+            }
+            
+            // Check top and bottom bounds
+            if (
+                (this.getAbsoluteDistance(y, boundry.top)   <= this.ALLOWED_ERROR_MARGIN ||
+                this.getAbsoluteDistance(y, boundry.bottom) <= this.ALLOWED_ERROR_MARGIN) &&
+                (x >= boundry.left && x <= boundry.right)
+            ) {
+                return true;
+            }
+            return false;
+        }
+        
+        this.getAbsoluteDistance = function(a, b) {
+            return Math.abs(Math.abs(a) - Math.abs(b));
+        }
     }
     
     Events.prototype.trigger = function (name, extraParams) {
+        if (!this.eventStorage[name]) {
+            return;
+        }
         this.eventStorage[name](extraParams);
     }
     
@@ -24,16 +54,8 @@ window.GameBoard = window.GameBoard || {};
     
     Events.prototype.checkCollisions = function (x, y) {
         var temp = null;
-        console.log(x, y);
         for (var key in this.collisionStorage) {
-            temp = this.collisionStorage[key];
-            if (
-                (Math.abs(temp.right-x)  <= this.ALLOWED_ERROR_MARGIN) || 
-                (Math.abs(temp.left-x)   <= this.ALLOWED_ERROR_MARGIN) ||
-                (Math.abs(temp.top-y)    <= this.ALLOWED_ERROR_MARGIN) ||
-                (Math.abs(temp.bottom-y) <= this.ALLOWED_ERROR_MARGIN)
-            ) {
-                console.log('HIT!');
+            if (this.isIntersection(x, y, this.collisionStorage[key])) {
                 g.events.trigger('onCollision', key);
             }
         }

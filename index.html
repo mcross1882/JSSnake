@@ -3,6 +3,61 @@
     <head>
         <title>Snake :: The best game alive</title>
         
+        <style type="text/css">
+            body {
+                color: #303030;
+            }
+            
+            .green {
+                color: #44EE44;
+            }
+            
+            .container {
+                background-color: #FFFFFF;
+                box-shadow: 5px 5px 5px #EFEFEF;
+                width: 350px;
+                padding: 1em;
+            }
+            
+            .pull-left {
+                float: left;
+            }
+            
+            .pull-right {
+                float: right;
+            }
+            
+            .btn-group {
+                text-align: center;
+                padding: 0.5em 0px;
+            }
+            
+            .btn-group .btn {
+                border: 0px;
+                border-right: 1px solid #CCCCCC;
+                border-left: 1px solid #CCCCCC;
+                background-color: transparent;
+            }
+            
+            .btn-group .btn:hover {
+                color: #0188CC;
+            }
+            
+            .btn-group .selected {
+                color: #0188CC;
+            }
+            
+            .btn-group>:first-child,
+            .btn-group>:last-child {
+                border: 0px;
+            }
+            
+            #gameboard {
+                width: 100%;
+            }
+        </style>
+        
+        <script type="text/javascript" src="js/GameBoard.js"></script>
         <script type="text/javascript" src="js/Events.js"></script>
         <script type="text/javascript" src="js/Snake.js"></script>
         <script type="text/javascript" src="js/FruitMaker.js"></script>
@@ -12,7 +67,23 @@
     
     <body>
         <div class="container">
+            <div class="header">
+                <h3>JS<span class="green">Snake</span></h3>
+                <p class="game-info">
+                    <span class="pull-left"><strong>Score:</strong> <span id="score-value"></span> pt</span>
+                    <span class="pull-right"><strong>Lives:</strong> <span id="lives-value"></span></span>
+                </p>
+            </div>
+            
             <canvas id="gameboard" style="border: 1px solid black;"></canvas>
+            
+            <div class="footer">
+                <div class="btn-group">
+                    <button type="button" class="btn" data-mode="easy">Easy</button>
+                    <button type="button" class="btn selected" data-mode="medium">Medium</button>
+                    <button type="button" class="btn" data-mode="hard">Hard</button>
+                </div>
+            </div>
         </div>
     </body>
 </html>
