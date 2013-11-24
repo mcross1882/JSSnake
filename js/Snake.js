@@ -5,7 +5,7 @@ window.GameBoard = window.GameBoard || {};
 
     var Snake = function(options) {
         // Constructor
-        this.MOVE_DISTANCE = 6;
+        this.MOVE_DISTANCE = 4;
         this.GROW_DISTANCE = 10;
         
         this.reset(options.startX, options.startY, options.defaultLength);
@@ -55,11 +55,12 @@ window.GameBoard = window.GameBoard || {};
     }
     
     Snake.prototype.grow = function() {
-        this.tail.push(this.tail[this.tail.length-1]);
+        if (this.tail.length >= 0) {
+            this.tail.push(this.tail[this.tail.length-1]);
+        }
         this.move(this.currentDirection);
     }
-    
-    Snake.prototype.move = function(direction) {
+        Snake.prototype.move = function(direction) {
         for (var i=this.tail.length; i >= 0; i--) {
             this.tail[i] = this.tail[i-1];   
         }

@@ -15,51 +15,38 @@ window.GameBoard = window.GameBoard || {};
     }
     
     Controller.prototype.onKeyDown = function(event) {
-        if (this.inputMutex) {
-            return;
-        }
-        
         var direction = this.keyCodeToDirection(event.keyCode);
+        console.log(event.keyCode, direction, this.currentDirection);
         if (
             direction != null && 
             this.currentDirection != direction &&
             !this.isOppositeDirection(direction) 
         ) {
             g.events.trigger('onDirectionChanged', direction);
+            this.currentDirection = direction;
         } else {
             return;
         }
-        this.currentDirection = direction;
-        
-        this.limitInput();
-    }
-    
-    Controller.prototype.limitInput = function() {
-        var that = this;
-        this.inputMutex = true;
-        setTimeout(function() {
-            that.inputMutex = false;
-        }, this.INPUT_LIMITER);
     }
     
     Controller.prototype.keyCodeToDirection = function(keyCode) {
-        var direction = false;
+        var direction = 'right';
         switch (keyCode) {
             case 40: case 83:
                 direction = 'up';
-            break
+                break
             
             case 37: case 65:
                 direction = 'left';
-            break;
+                break;
                 
             case 38: case 87:
                 direction = 'down';
-            break;
+                break;
                 
             case 39: case 68:
                 direction = 'right';
-            break;
+                break;
         }
         return direction;
     }

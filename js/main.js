@@ -9,7 +9,7 @@ window.GameBoard = window.GameBoard || {};
     var snake = new g.Snake({
         startX: 160,
         startY: 160,
-        defaultLength: 5
+        defaultLength: g.getSetting('defaultLength')
     });
     var fruit = new g.FruitMaker();
     var controller = new g.Controller();
@@ -29,8 +29,12 @@ window.GameBoard = window.GameBoard || {};
     function onCollision (entityName) {
         switch (entityName) {
             case 'fruit':
-                g.setScore(g.getScore()+10);
-                snake.grow();
+                g.setScore(g.getScore()+g.getSetting('fruitScore'));
+                var length = g.getSetting('growLength');
+                
+                for (var i=0; i<length; i++) {
+                    snake.grow();
+                }
                 fruit.prepare({ context: globalContext, width: globalCanvas.width, height: globalCanvas.height });
                 break;
                 
@@ -47,9 +51,9 @@ window.GameBoard = window.GameBoard || {};
         if (lives <= 0) {
             gameOver();
         } else {
-            g.setScore(0);
             g.setLives(lives-1);
-            startGame(globalContext, globalCanvas.width, globalCanvas.height);
+            previousDirection = 'right';
+            snake.reset(globalCanvas.width, globalCanvas.height, g.getSetting('defaultLength'));
         }
     }
     
@@ -59,36 +63,49 @@ window.GameBoard = window.GameBoard || {};
         clearInterval(previousInterval);
     }
     
-    function startGame(ctx, canvasWidth, canvasHeight) {
+    function stopGame() {
         if (previousInterval != null) {
             clearInterval(previousInterval);
             previousInterval = null;
         }
+    }    
+
+    function startGame() {
+        stopGame();
         
         g.events.addCollision('world', { 
             left: 0, 
             top: 0, 
-            right: canvasWidth, 
-            bottom: canvasHeight 
+            right: globalCanvas.width, 
+            bottom: globalCanvas.height 
         });
         
         fruit.prepare({ 
             context: globalContext, 
-            width: canvasWidth, 
-            height: canvasHeight 
+            width: globalCanvas.width, 
+            height: globalCanvas.height 
         });
         
-        snake.reset(canvasWidth, canvasHeight, 5);
+        previousDirection = 'right';
+        snake.reset(globalCanvas.width, globalCanvas.height, g.getSetting('defaultLength'));
         
         previousInterval = setInterval(function() {
-            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            globalContext.clearRect(0, 0, globalCanvas.width, globalCanvas.height);
             g.events.trigger('onDirectionChanged', previousDirection);
             
-            fruit.draw(ctx);
-            ctx.save();
-            snake.draw(ctx);
-            ctx.restore();
+            fruit.draw(globalContext);
+            globalContext.save();
+            snake.draw(globalContext);
+            globalContext.restore();
         }, g.getSetting('refreshInterval'));
+    }
+    
+    function connectSettingButton(mode) {
+        document.getElementById('settings-' + mode).onclick = function(e) {
+            gameOver();
+            stopGame();
+            g.setMode(mode);
+        }
     }
     
     g.events.bind('onDirectionChanged', onDirectionChanged);
@@ -97,9 +114,22 @@ window.GameBoard = window.GameBoard || {};
     window.onload = function() {
         globalCanvas  = document.getElementById("gameboard");
         globalContext = globalCanvas.getContext('2d');
+        
+        connectSettingButton('easy');
+        connectSettingButton('medium');
+        connectSettingButton('hard');
+        
+        document.getElementById('start-game').onclick = function() {
+            if (this.innerHTML == 'Start') {
+                this.innerHTML = 'Stop';
+                startGame();
+            } else {
+                this.innerHTML = 'Start';
+                stopGame();
+            }
+        }
        
         gameOver();
-        startGame(globalContext, globalCanvas.width, globalCanvas.height);
     };
     
-})(window.GameBoard);
+})(window.GameBoard);   

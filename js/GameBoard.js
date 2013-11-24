@@ -5,15 +5,24 @@
         this.settings = {
             easy: {
                 refreshInterval: 500,
-                numberOfLives:   5
+                numberOfLives:   5,
+                fruitScore:      5,
+                defaultLength:   10,
+                growLength:      2
             },
             medium: {
                 refreshInterval: 250,
-                numberOfLives:   3
+                numberOfLives:   3,
+                fruitScore:      10,
+                defaultLength:   10,
+                growLength:      3
             },
             hard: {
                 refreshInterval: 100,
-                numberOfLives:   3
+                numberOfLives:   3,
+                fruitScore:      8,
+                defaultLength:   10,
+                growLength:      4
             }
         };
         
