@@ -59,7 +59,6 @@ window.GameBoard = window.GameBoard || {};
     }
     
     function gameOver() {
-        g.setScore(0);
         g.setLives(g.getSetting('numberOfLives'));
         stopGame();
     }
@@ -87,6 +86,7 @@ window.GameBoard = window.GameBoard || {};
             height: globalCanvas.height 
         });
         
+        g.setScore(0);
         previousDirection = 'right';
         controller.setCurrentDirection(previousDirection);
         snake.reset(globalCanvas.width, globalCanvas.height, g.getSetting('defaultLength'));
