@@ -5,7 +5,7 @@ window.GameBoard = window.GameBoard || {};
 
     var Events = function() {
         // Constructor
-        this.ALLOWED_ERROR_MARGIN = 5;
+        this.ALLOWED_ERROR_MARGIN = 2;
         
         this.eventStorage = [];
         this.collisionStorage = [];

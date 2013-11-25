@@ -16,7 +16,6 @@ window.GameBoard = window.GameBoard || {};
     
     Controller.prototype.onKeyDown = function(event) {
         var direction = this.keyCodeToDirection(event.keyCode);
-        console.log(event.keyCode, direction, this.currentDirection);
         if (
             direction != null && 
             this.currentDirection != direction &&
@@ -30,7 +29,7 @@ window.GameBoard = window.GameBoard || {};
     }
     
     Controller.prototype.keyCodeToDirection = function(keyCode) {
-        var direction = 'right';
+        var direction = null;
         switch (keyCode) {
             case 40: case 83:
                 direction = 'up';
@@ -66,6 +65,10 @@ window.GameBoard = window.GameBoard || {};
                 return this.currentDirection == 'down';
         }
         return false;
+    }
+    
+    Controller.prototype.setCurrentDirection = function(direction) {
+        this.currentDirection = direction;
     }
     
     g.Controller = Controller;

@@ -47,12 +47,13 @@ window.GameBoard = window.GameBoard || {};
     
     function failedGame() {
         var lives = g.getLives();
-        
+                            
         if (lives <= 0) {
             gameOver();
         } else {
             g.setLives(lives-1);
             previousDirection = 'right';
+            controller.setCurrentDirection(previousDirection);
             snake.reset(globalCanvas.width, globalCanvas.height, g.getSetting('defaultLength'));
         }
     }
@@ -60,7 +61,7 @@ window.GameBoard = window.GameBoard || {};
     function gameOver() {
         g.setScore(0);
         g.setLives(g.getSetting('numberOfLives'));
-        clearInterval(previousInterval);
+        stopGame();
     }
     
     function stopGame() {
@@ -87,6 +88,7 @@ window.GameBoard = window.GameBoard || {};
         });
         
         previousDirection = 'right';
+        controller.setCurrentDirection(previousDirection);
         snake.reset(globalCanvas.width, globalCanvas.height, g.getSetting('defaultLength'));
         
         previousInterval = setInterval(function() {
@@ -102,8 +104,6 @@ window.GameBoard = window.GameBoard || {};
     
     function connectSettingButton(mode) {
         document.getElementById('settings-' + mode).onclick = function(e) {
-            gameOver();
-            stopGame();
             g.setMode(mode);
         }
     }
@@ -125,7 +125,7 @@ window.GameBoard = window.GameBoard || {};
                 startGame();
             } else {
                 this.innerHTML = 'Start';
-                stopGame();
+                gameOver();
             }
         }
        

@@ -4,21 +4,21 @@
     var GameBoard = function() {
         this.settings = {
             easy: {
-                refreshInterval: 500,
+                refreshInterval: 50,
                 numberOfLives:   5,
                 fruitScore:      5,
                 defaultLength:   10,
                 growLength:      2
             },
             medium: {
-                refreshInterval: 250,
+                refreshInterval: 25,
                 numberOfLives:   3,
                 fruitScore:      10,
                 defaultLength:   10,
                 growLength:      3
             },
             hard: {
-                refreshInterval: 100,
+                refreshInterval: 10,
                 numberOfLives:   3,
                 fruitScore:      8,
                 defaultLength:   10,
