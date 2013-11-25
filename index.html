@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Snake :: The best game alive</title>
+        
+        <link rel="stylesheet" type="text/css" href="css/theme.css" />
+        
+        <script type="text/javascript" src="js/GameBoard.js"></script>
+        <script type="text/javascript" src="js/Events.js"></script>
+        <script type="text/javascript" src="js/Snake.js"></script>
+        <script type="text/javascript" src="js/FruitMaker.js"></script>
+        <script type="text/javascript" src="js/Controller.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="header">
+                <h3>JS<span class="green">Snake</span></h3>
+                <p class="game-info">
+                    <span class="pull-left"><strong>Score:</strong> <span id="score-value"></span> pt</span>
+                    <span class="pull-right"><strong>Lives:</strong> <span id="lives-value"></span></span>
+                </p>
+            </div>
+            
+            <canvas id="gameboard"></canvas>
+            
+            <div class="footer">
+                <div class="btn-group">
+                    <button id="settings-easy" type="button" class="btn">Easy</button>
+                    <button id="settings-medium" type="button" class="btn selected">Medium</button>
+                    <button id="settings-hard" type="button" class="btn">Hard</button>
+                </div>
+                <button id="start-game" type="button" class="btn pull-right">Start</button>
+            </div>
+        </div>
+    </body>
+</html>

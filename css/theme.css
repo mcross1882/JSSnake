@@ -1,0 +1,63 @@
+body {
+    color: #303030;
+    background-color: #FCFCFC;
+}
+
+.green {
+    color: #44EE44;
+}
+
+.container {
+    background-color: #FFFFFF;
+    box-shadow: 5px 5px 5px #EFEFEF;
+    width: 350px;
+    padding: 1em;
+}
+
+.container .header h3 {
+    display: inline;
+    font-size: 2em;
+}
+
+.container .header .game-info {
+    height: 1.5em;
+    margin: 0.25em 0px;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.btn-group {
+    padding: 0.5em 0px;
+    display: inline;
+}
+
+.btn {
+    border: 0px;
+    background-color: transparent;
+}
+
+.btn:hover {
+    color: #44EE44;
+    cursor: pointer;
+}
+
+.btn-group .btn {
+    border-right: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
+}
+
+.btn-group>:first-child,
+.btn-group>:last-child {
+    border: 0px;
+}
+
+#gameboard {
+    width: 100%;
+    border: 1px solid #CCCCCC;
+}
